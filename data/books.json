@@ -1,0 +1,160 @@
+{
+    "books": [
+        {
+            "id": 1,
+            "title": "To Kill a Mockingbird",
+            "author": "Harper Lee",
+            "year": 1960,
+            "available": true,
+            "ratings": [
+                5
+            ],
+            "total_ratings": 1,
+            "average_rating": 5
+        },
+        {
+            "id": 2,
+            "title": "1984",
+            "author": "George Orwell",
+            "year": 1949,
+            "available": true,
+            "ratings": [
+                5
+            ],
+            "total_ratings": 1,
+            "average_rating": 5
+        },
+        {
+            "id": 3,
+            "title": "Pride and Prejudice",
+            "author": "Jane Austen",
+            "year": 1813,
+            "available": true,
+            "ratings": [
+                5
+            ],
+            "total_ratings": 1,
+            "average_rating": 5
+        },
+        {
+            "id": 4,
+            "title": "The Great Gatsby",
+            "author": "F. Scott Fitzgerald",
+            "year": 1925,
+            "available": true,
+            "ratings": [
+                5
+            ],
+            "total_ratings": 1,
+            "average_rating": 5
+        },
+        {
+            "id": 5,
+            "title": "Moby-Dick",
+            "author": "Herman Melville",
+            "year": 1851,
+            "available": true,
+            "ratings": [
+                5
+            ],
+            "total_ratings": 1,
+            "average_rating": 5
+        },
+        {
+            "id": 6,
+            "title": "The Catcher in the Rye",
+            "author": "J.D. Salinger",
+            "year": 1951,
+            "available": true,
+            "ratings": [
+                5
+            ],
+            "total_ratings": 1,
+            "average_rating": 5
+        },
+        {
+            "id": 7,
+            "title": "The Hobbit",
+            "author": "J.R.R. Tolkien",
+            "year": 1937,
+            "available": true,
+            "ratings": [
+                5
+            ],
+            "total_ratings": 1,
+            "average_rating": 5
+        },
+        {
+            "id": 8,
+            "title": "Fahrenheit 451",
+            "author": "Ray Bradbury",
+            "year": 1953,
+            "available": true,
+            "ratings": [
+                5
+            ],
+            "total_ratings": 1,
+            "average_rating": 5
+        },
+        {
+            "id": 9,
+            "title": "Jane Eyre",
+            "author": "Charlotte Brontë",
+            "year": 1847,
+            "available": true,
+            "ratings": [
+                5
+            ],
+            "total_ratings": 1,
+            "average_rating": 5
+        },
+        {
+            "id": 10,
+            "title": "Brave New World",
+            "author": "Aldous Huxley",
+            "year": 1932,
+            "available": true,
+            "ratings": [
+                5
+            ],
+            "total_ratings": 1,
+            "average_rating": 5
+        },
+        {
+            "id": 11,
+            "title": "Les Misérables",
+            "author": "Victor Hugo",
+            "year": 1862,
+            "available": true,
+            "ratings": [
+                5
+            ],
+            "total_ratings": 1,
+            "average_rating": 5
+        },
+        {
+            "id": 12,
+            "title": "The Iliad",
+            "author": "Homer",
+            "year": 750,
+            "available": true,
+            "ratings": [
+                5
+            ],
+            "total_ratings": 1,
+            "average_rating": 5
+        },
+        {
+            "id": 13,
+            "title": "The Odyssey",
+            "author": "Homer",
+            "year": 725,
+            "available": true,
+            "ratings": [
+                5
+            ],
+            "total_ratings": 1,
+            "average_rating": 5
+        }
+    ]
+}
