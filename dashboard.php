@@ -73,7 +73,7 @@ $user_history = array_filter($history, function($record) {
             <h2>Search Books</h2>
             <form method="GET" action="">
                 <div class="search-bar">
-                    <input type="text" name="search" placeholder="Search by title or author..." 
+                    <input type="text" name="search"  autocomplete="off"placeholder="Search by title or author..." 
                            value="<?php echo htmlspecialchars($search_query); ?>">
                     <button type="submit" class="btn btn-primary">Search</button>
                     <?php if ($search_query): ?>
