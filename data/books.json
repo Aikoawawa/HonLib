@@ -41,7 +41,7 @@
             "title": "The Great Gatsby",
             "author": "F. Scott Fitzgerald",
             "year": 1925,
-            "available": true,
+            "available": false,
             "ratings": [
                 5
             ],
@@ -53,7 +53,7 @@
             "title": "Moby-Dick",
             "author": "Herman Melville",
             "year": 1851,
-            "available": true,
+            "available": false,
             "ratings": [
                 5
             ],

@@ -1,13 +1,6 @@
 <?php
-/**
- * Database operations using JSON files
- */
-
 require_once 'config.php';
 
-/**
- * Read JSON file
- */
 function read_json($file) {
     if (!file_exists($file)) {
         // Try to create the file with empty structure
@@ -22,9 +15,6 @@ function read_json($file) {
     return $data ?: [];
 }
 
-/**
- * Write JSON file
- */
 function write_json($file, $data) {
     $dir = dirname($file);
     if (!is_dir($dir)) {
@@ -39,17 +29,11 @@ function write_json($file, $data) {
     return true;
 }
 
-/**
- * Get all users
- */
 function get_users() {
     $data = read_json(USERS_FILE);
     return $data['users'] ?? [];
 }
 
-/**
- * Get user by username
- */
 function get_user_by_username($username) {
     $users = get_users();
     foreach ($users as $user) {
@@ -60,17 +44,11 @@ function get_user_by_username($username) {
     return null;
 }
 
-/**
- * Get all books
- */
 function get_books() {
     $data = read_json(BOOKS_FILE);
     return $data['books'] ?? [];
 }
 
-/**
- * Get book by ID
- */
 function get_book_by_id($id) {
     $books = get_books();
     foreach ($books as $book) {
@@ -81,16 +59,10 @@ function get_book_by_id($id) {
     return null;
 }
 
-/**
- * Save books
- */
 function save_books($books) {
     return write_json(BOOKS_FILE, ['books' => $books]);
 }
 
-/**
- * Add book
- */
 function add_book($book) {
     $books = get_books();
     $book['id'] = generate_id($books);
@@ -101,9 +73,6 @@ function add_book($book) {
     return save_books($books);
 }
 
-/**
- * Update book
- */
 function update_book($id, $updated_book) {
     $books = get_books();
     foreach ($books as $key => $book) {

@@ -1,13 +1,6 @@
 <?php
-/**
- * Authentication functions
- */
-
 require_once 'db.php';
 
-/**
- * Login user
- */
 function login_user($username, $password) {
     $user = get_user_by_username($username);
     
@@ -21,26 +14,18 @@ function login_user($username, $password) {
     return false;
 }
 
-/**
- * Logout user
- */
 function logout_user() {
     session_unset();
     session_destroy();
 }
 
-/**
- * Require login
- */
 function require_login() {
     if (!is_logged_in()) {
         redirect('index.php');
     }
 }
 
-/**
- * Require admin
- */
+
 function require_admin() {
     require_login();
     if (!is_admin()) {
