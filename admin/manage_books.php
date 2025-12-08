@@ -133,7 +133,7 @@ $error = $_GET['error'] ?? '';
             <?php endif; ?>
         </div>
         
-        <!-- Edit Book Modal (hidden by default) -->
+        <!-- Edit Book Modal (edit Book popup) -->
         <div id="editModal" class="modal">
             <div class="modal-content">
                 <span class="close" onclick="closeEditModal()">&times;</span>
@@ -143,12 +143,12 @@ $error = $_GET['error'] ?? '';
                     
                     <div class="form-group">
                         <label for="edit_title">Title:</label>
-                        <input type="text" id="edit_title" name="title" required>
+                        <input type="text" id="edit_title" name="title" autocomplete="off" required>
                     </div>
                     
                     <div class="form-group">
                         <label for="edit_author">Author:</label>
-                        <input type="text" id="edit_author" name="author" required>
+                        <input type="text" id="edit_author" name="author"  autocomplete="off" required>
                     </div>
                     
                     <div class="form-group">
