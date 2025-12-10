@@ -1,20 +1,12 @@
 <?php
-/**
- * Admin book management page
- */
-
-// Set the correct include path
 require_once __DIR__ . '/../includes/config.php';
 require_once __DIR__ . '/../includes/auth.php';
 require_once __DIR__ . '/../includes/db.php';
 
-// Require admin
 require_admin();
 
-// Get all books
 $books = get_books();
 
-// Success/Error messages
 $success = $_GET['success'] ?? '';
 $error = $_GET['error'] ?? '';
 ?>

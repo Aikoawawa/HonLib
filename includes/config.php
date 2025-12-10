@@ -5,7 +5,6 @@ if (session_status() === PHP_SESSION_NONE) {
     session_start();
 }
 
-// Define base path - works from both root and admin folder
 if (!defined('BASE_PATH')) {
 
     if (basename(dirname(__FILE__)) === 'includes' && file_exists(__DIR__ . '/../data/')) {
