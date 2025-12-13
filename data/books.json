@@ -41,7 +41,7 @@
             "title": "The Great Gatsby",
             "author": "F. Scott Fitzgerald",
             "year": 1925,
-            "available": false,
+            "available": true,
             "ratings": [
                 5
             ],
@@ -53,7 +53,7 @@
             "title": "Moby-Dick",
             "author": "Herman Melville",
             "year": 1851,
-            "available": false,
+            "available": true,
             "ratings": [
                 5
             ],
@@ -77,18 +77,6 @@
             "title": "The Hobbit",
             "author": "J.R.R. Tolkien",
             "year": 1937,
-            "available": true,
-            "ratings": [
-                5
-            ],
-            "total_ratings": 1,
-            "average_rating": 5
-        },
-        {
-            "id": 8,
-            "title": "Fahrenheit 451",
-            "author": "Ray Bradbury",
-            "year": 1953,
             "available": true,
             "ratings": [
                 5
@@ -139,10 +127,11 @@
             "year": 750,
             "available": true,
             "ratings": [
-                5
+                5,
+                1
             ],
-            "total_ratings": 1,
-            "average_rating": 5
+            "total_ratings": 2,
+            "average_rating": 3
         },
         {
             "id": 13,
@@ -155,6 +144,16 @@
             ],
             "total_ratings": 1,
             "average_rating": 5
+        },
+        {
+            "title": "meow",
+            "author": "wadawdsadaw",
+            "year": 2000,
+            "available": true,
+            "id": 14,
+            "ratings": [],
+            "total_ratings": 0,
+            "average_rating": 0
         }
     ]
 }

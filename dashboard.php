@@ -1,36 +1,29 @@
 <?php
-/**
- * Main dashboard - Shows books, search, and pomodoro timer
- */
-
 require_once 'includes/config.php';
-require_once 'includes/auth.php';
-require_once 'includes/db.php';
+require_once 'includes/Database.php';
+require_once 'includes/User.php';
+require_once 'includes/Book.php';
+require_once 'includes/BorrowHistory.php';
+require_once 'includes/Auth.php';
 
-// Require login
-require_login();
+$auth = new Auth();
+$bookModel = new Book();
+$historyModel = new BorrowHistory();
 
-// Get all books
-$books = get_books();
+
+$auth->requireLogin();
+
+
+$books = $bookModel->getAll();
 $search_results = $books;
 $search_query = '';
 
-// Handle search
 if (isset($_GET['search'])) {
     $search_query = sanitize_input($_GET['search']);
-    if (!empty($search_query)) {
-        $search_results = array_filter($books, function($book) use ($search_query) {
-            return stripos($book['title'], $search_query) !== false || 
-                   stripos($book['author'], $search_query) !== false;
-        });
-    }
+    $search_results = $bookModel->search($search_query);
 }
 
-// Get user's borrow history
-$history = get_borrow_history();
-$user_history = array_filter($history, function($record) {
-    return $record['user_id'] == $_SESSION['user_id'];
-});
+$user_history = $historyModel->getByUserId($_SESSION['user_id']);
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -46,7 +39,7 @@ $user_history = array_filter($history, function($record) {
             <img src="assets/Logo.png" width="230px" height="98px">
             <div class="user-info">
                 <span>Welcome, <?php echo htmlspecialchars($_SESSION['name']); ?> (<?php echo htmlspecialchars($_SESSION['role']); ?>)</span>
-                <?php if (is_admin()): ?>
+                <?php if ($auth->isAdmin()): ?>
                     <a href="admin/manage_books.php" class="btn btn-secondary">Manage Books</a>
                 <?php endif; ?>
                 <a href="logout.php" class="btn btn-danger">Logout</a>
@@ -140,19 +133,7 @@ $user_history = array_filter($history, function($record) {
                                             <button type="submit" class="btn btn-small btn-primary">Borrow</button>
                                         </form>
                                     <?php else: ?>
-                                        <?php
-                                        // Check if current user has this book borrowed
-                                        $user_has_book = false;
-                                        foreach ($history as $record) {
-                                            if ($record['book_id'] == $book['id'] && 
-                                                $record['user_id'] == $_SESSION['user_id'] && 
-                                                $record['status'] === 'borrowed') {
-                                                $user_has_book = true;
-                                                break;
-                                            }
-                                        }
-                                        ?>
-                                        <?php if ($user_has_book): ?>
+                                        <?php if ($historyModel->userHasBook($_SESSION['user_id'], $book['id'])): ?>
                                             <form method="POST" action="return_book.php" style="display: inline;">
                                                 <input type="hidden" name="book_id" value="<?php echo $book['id']; ?>">
                                                 <button type="submit" class="btn btn-small btn-secondary">Return</button>

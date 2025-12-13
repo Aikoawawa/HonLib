@@ -1,14 +1,16 @@
 <?php
-/**
- * Handle book rating
- */
 
 require_once 'includes/config.php';
-require_once 'includes/auth.php';
-require_once 'includes/db.php';
+require_once 'includes/Database.php';
+require_once 'includes/User.php';
+require_once 'includes/Book.php';
+require_once 'includes/Auth.php';
+
+$auth = new Auth();
+$bookModel = new Book();
 
 // Require login
-require_login();
+$auth->requireLogin();
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $book_id = intval($_POST['book_id'] ?? 0);
@@ -19,19 +21,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         redirect('dashboard.php');
     }
     
-    // Get book
-    $book = get_book_by_id($book_id);
-    if (!$book) {
-        redirect('dashboard.php');
-    }
-    
     // Add rating
-    $book['ratings'][] = $rating;
-    $book['total_ratings'] = count($book['ratings']);
-    $book['average_rating'] = array_sum($book['ratings']) / $book['total_ratings'];
-    
-    // Update book
-    update_book($book_id, $book);
+    $bookModel->addRating($book_id, $rating);
 }
 
 redirect('dashboard.php');

@@ -1,10 +1,15 @@
 <?php
-require_once '../includes/config.php';
-require_once '../includes/auth.php';
-require_once '../includes/db.php';
 
-// Require admin
-require_admin();
+require_once __DIR__ . '/../includes/config.php';
+require_once __DIR__ . '/../includes/Database.php';
+require_once __DIR__ . '/../includes/User.php';
+require_once __DIR__ . '/../includes/Book.php';
+require_once __DIR__ . '/../includes/Auth.php';
+
+$auth = new Auth();
+$bookModel = new Book();
+
+$auth->requireAdmin();
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $title = sanitize_input($_POST['title'] ?? '');
@@ -12,12 +17,13 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $year = intval($_POST['year'] ?? 0);
     $available = isset($_POST['available']) && $_POST['available'] == '1';
     
-    // Validate input
+    
     if (empty($title) || empty($author) || $year < 1000) {
-        redirect('manage_books.php');
+        redirect('manage_books.php?error=invalid');
+        exit;
     }
     
-    // Create book array
+    
     $book = [
         'title' => $title,
         'author' => $author,
@@ -25,10 +31,13 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         'available' => $available
     ];
     
-    // Add book
-    add_book($book);
-    
-    redirect('manage_books.php?success=added');
+   
+    if ($bookModel->add($book)) {
+        redirect('manage_books.php?success=added');
+    } else {
+        redirect('manage_books.php?error=failed');
+    }
+    exit;
 }
 
 redirect('manage_books.php');

@@ -1,19 +1,14 @@
 <?php
-/**
- * Login page - Entry point of the application
- */
 
 require_once 'includes/config.php';
-require_once 'includes/auth.php';
+require_once 'includes/Database.php';
+require_once 'includes/User.php';
+require_once 'includes/Auth.php';
 
-// Redirect if already logged in
-if (is_logged_in()) {
-    redirect('dashboard.php');
-}
+$auth = new Auth();
 
 $error = '';
 
-// Handle login form submission
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $username = sanitize_input($_POST['username'] ?? '');
     $password = $_POST['password'] ?? '';
@@ -21,7 +16,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     if (empty($username) || empty($password)) {
         $error = 'Please enter both username and password.';
     } else {
-        if (login_user($username, $password)) {
+        if ($auth->login($username, $password)) {
             redirect('dashboard.php');
         } else {
             $error = 'Invalid username or password.';

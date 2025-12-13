@@ -1,14 +1,22 @@
 <?php
-require_once __DIR__ . '/../includes/config.php';
-require_once __DIR__ . '/../includes/auth.php';
-require_once __DIR__ . '/../includes/db.php';
 
-require_admin();
+    require_once __DIR__ . '/../includes/config.php';
+    require_once __DIR__ . '/../includes/Database.php';
+    require_once __DIR__ . '/../includes/User.php';
+    require_once __DIR__ . '/../includes/Book.php';
+    require_once __DIR__ . '/../includes/Auth.php';
 
-$books = get_books();
+    $auth = new Auth();
+    $bookModel = new Book();
 
-$success = $_GET['success'] ?? '';
-$error = $_GET['error'] ?? '';
+
+    $auth->requireAdmin();
+
+
+    $books = $bookModel->getAll();
+
+    $success = $_GET['success'] ?? '';
+    $error = $_GET['error'] ?? '';
 ?>
 <!DOCTYPE html>
 <html lang="en">

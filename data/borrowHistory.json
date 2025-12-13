@@ -57,8 +57,8 @@
             "book_id": 4,
             "book_title": "The Great Gatsby",
             "borrow_date": "2025-12-08",
-            "return_date": null,
-            "status": "borrowed"
+            "return_date": "2025-12-13",
+            "status": "returned"
         },
         {
             "id": 7,
@@ -67,8 +67,28 @@
             "book_id": 5,
             "book_title": "Moby-Dick",
             "borrow_date": "2025-12-08",
-            "return_date": null,
-            "status": "borrowed"
+            "return_date": "2025-12-13",
+            "status": "returned"
+        },
+        {
+            "id": 8,
+            "user_id": 4,
+            "username": "Jamie",
+            "book_id": 13,
+            "book_title": "The Odyssey",
+            "borrow_date": "2025-12-13",
+            "return_date": "2025-12-13",
+            "status": "returned"
+        },
+        {
+            "id": 9,
+            "user_id": 4,
+            "username": "Jamie",
+            "book_id": 12,
+            "book_title": "The Iliad",
+            "borrow_date": "2025-12-13",
+            "return_date": "2025-12-13",
+            "status": "returned"
         }
     ]
 }

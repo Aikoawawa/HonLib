@@ -1,7 +1,10 @@
 <?php
 require_once 'includes/config.php';
-require_once 'includes/auth.php';
+require_once 'includes/Database.php';
+require_once 'includes/User.php';
+require_once 'includes/Auth.php';
 
-logout_user();
+$auth = new Auth();
+$auth->logout();
 redirect('index.php');
 ?>

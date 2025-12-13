@@ -1,35 +1,54 @@
 <?php
-require_once 'db.php';
 
-function login_user($username, $password) {
-    $user = get_user_by_username($username);
-    
-    if ($user && password_verify($password, $user['password'])) {
-        $_SESSION['user_id'] = $user['id'];
-        $_SESSION['username'] = $user['username'];
-        $_SESSION['role'] = $user['role'];
-        $_SESSION['name'] = $user['name'];
-        return true;
+    class Auth {
+        private $userModel;
+        
+
+        public function __construct() {
+            $this->userModel = new User();
+        }
+        
+
+        public function login($username, $password) {
+            $user = $this->userModel->verify($username, $password);
+            
+            if ($user) {
+                $_SESSION['user_id'] = $user['id'];
+                $_SESSION['username'] = $user['username'];
+                $_SESSION['role'] = $user['role'];
+                $_SESSION['name'] = $user['name'];
+                return true;
+            }
+            return false;
+        }
+
+        public function logout() {
+            session_unset();
+            session_destroy();
+        }
+        
+
+        public function isLoggedIn() {
+            return is_logged_in();
+        }
+        
+
+        public function isAdmin() {
+            return is_admin();
+        }
+        
+
+        public function requireLogin() {
+            if (!$this->isLoggedIn()) {
+                redirect('index.php');
+            }
+        }
+        
+        public function requireAdmin() {
+            $this->requireLogin();
+            if (!$this->isAdmin()) {
+                redirect('dashboard.php');
+            }
+        }
     }
-    return false;
-}
-
-function logout_user() {
-    session_unset();
-    session_destroy();
-}
-
-function require_login() {
-    if (!is_logged_in()) {
-        redirect('index.php');
-    }
-}
-
-
-function require_admin() {
-    require_login();
-    if (!is_admin()) {
-        redirect('dashboard.php');
-    }
-}
 ?>

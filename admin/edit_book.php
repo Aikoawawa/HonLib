@@ -1,10 +1,16 @@
 <?php
-require_once '../includes/config.php';
-require_once '../includes/auth.php';
-require_once '../includes/db.php';
+
+require_once __DIR__ . '/../includes/config.php';
+require_once __DIR__ . '/../includes/Database.php';
+require_once __DIR__ . '/../includes/User.php';
+require_once __DIR__ . '/../includes/Book.php';
+require_once __DIR__ . '/../includes/Auth.php';
+
+$auth = new Auth();
+$bookModel = new Book();
 
 // Require admin
-require_admin();
+$auth->requireAdmin();
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $book_id = intval($_POST['book_id'] ?? 0);
@@ -15,13 +21,15 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     
     // Validate input
     if ($book_id < 1 || empty($title) || empty($author) || $year < 1000) {
-        redirect('manage_books.php');
+        redirect('manage_books.php?error=invalid');
+        exit;
     }
     
-    // Get existing book to preserve ratings
-    $existing_book = get_book_by_id($book_id);
+    // Get existing book to check if it exists
+    $existing_book = $bookModel->getById($book_id);
     if (!$existing_book) {
-        redirect('manage_books.php');
+        redirect('manage_books.php?error=notfound');
+        exit;
     }
     
     // Create updated book array
@@ -33,9 +41,12 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     ];
     
     // Update book
-    update_book($book_id, $updated_book);
-    
-    redirect('manage_books.php?success=updated');
+    if ($bookModel->update($book_id, $updated_book)) {
+        redirect('manage_books.php?success=updated');
+    } else {
+        redirect('manage_books.php?error=failed');
+    }
+    exit;
 }
 
 redirect('manage_books.php');
